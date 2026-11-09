@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+        rel="stylesheet">
 
     <style>
         :root {
@@ -24,8 +27,16 @@
             --blanco: #ffffff;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background: var(--crema);
             color: var(--texto);
@@ -33,236 +44,712 @@
             line-height: 1.7;
             overflow-x: hidden;
         }
-        h1, h2, h3, .serif { font-family: "Playfair Display", Georgia, serif; font-weight: 500; }
-        section { padding: 88px 22px; }
-        .contenedor { max-width: 1120px; width: 100%; margin: auto; }
+
+        h1,
+        h2,
+        h3,
+        .serif {
+            font-family: "Playfair Display", Georgia, serif;
+            font-weight: 500;
+        }
+
+        section {
+            padding: 88px 22px;
+        }
+
+        .contenedor {
+            max-width: 1120px;
+            width: 100%;
+            margin: auto;
+        }
+
         .etiqueta {
-            color: var(--dorado); text-transform: uppercase;
-            letter-spacing: 3px; font-size: .76rem; font-weight: 700;
+            color: var(--dorado);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: .76rem;
+            font-weight: 700;
         }
+
         .titulo {
-            color: var(--azul-oscuro); text-align: center;
-            font-size: clamp(2rem, 5vw, 3.3rem); line-height: 1.2;
+            color: var(--azul-oscuro);
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 3.3rem);
+            line-height: 1.2;
         }
-        .bajada { max-width: 680px; margin: 16px auto 0; text-align: center; color: #687171; }
+
+        .bajada {
+            max-width: 680px;
+            margin: 16px auto 0;
+            text-align: center;
+            color: #687171;
+        }
+
         .ornamento {
-            display: flex; align-items: center; justify-content: center; gap: 16px;
-            color: var(--dorado); margin: 17px auto 28px; letter-spacing: 8px; max-width: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            color: var(--dorado);
+            margin: 17px auto 28px;
+            letter-spacing: 8px;
+            max-width: 320px;
         }
-        .ornamento::before, .ornamento::after {
-            content: ""; flex: 1; height: 1px;
+
+        .ornamento::before,
+        .ornamento::after {
+            content: "";
+            flex: 1;
+            height: 1px;
             background: linear-gradient(90deg, transparent, var(--dorado));
         }
-        .ornamento::after { transform: scaleX(-1); }
+
+        .ornamento::after {
+            transform: scaleX(-1);
+        }
 
         /* Animación de entrada */
-        .reveal { opacity: 0; transform: translateY(30px); transition: opacity .9s ease, transform .9s ease; }
-        .reveal.visible { opacity: 1; transform: none; }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity .9s ease, transform .9s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
 
         /* Portada de apertura */
         #pantallaInicio {
-            position: fixed; inset: 0; z-index: 1000;
-            display: grid; place-items: center; overflow: hidden;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
             background: var(--azul-oscuro);
             transition: opacity .8s ease, visibility .8s ease;
         }
-        #pantallaInicio.oculta { opacity: 0; visibility: hidden; pointer-events: none; }
-        #videoInicio { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+        #pantallaInicio.oculta {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        #videoInicio {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .velo {
-            position: absolute; inset: 0;
-            background: linear-gradient(135deg, rgba(35,55,59,.55), rgba(35,55,59,.78));
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(35, 55, 59, .55), rgba(35, 55, 59, .78));
         }
+
         .inicio-contenido {
-            position: relative; z-index: 2; color: white; text-align: center;
-            width: min(90%, 760px); padding: 35px 24px;
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: center;
+            width: min(90%, 760px);
+            padding: 35px 24px;
         }
-        .inicio-contenido h1 { font-size: clamp(2.5rem, 8vw, 5rem); line-height: 1.08; margin: 20px 0; }
-        .inicio-contenido p { font-size: 1.08rem; margin: 0 auto 28px; max-width: 580px; }
+
+        .inicio-contenido h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            line-height: 1.08;
+            margin: 20px 0;
+        }
+
+        .inicio-contenido p {
+            font-size: 1.08rem;
+            margin: 0 auto 28px;
+            max-width: 580px;
+        }
+
         .boton {
-            display: inline-flex; align-items: center; justify-content: center;
-            padding: 14px 28px; border-radius: 40px; text-decoration: none;
-            background: var(--azul); color: white; border: 1px solid transparent;
-            font: 600 .95rem "DM Sans", sans-serif; cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            background: var(--azul);
+            color: white;
+            border: 1px solid transparent;
+            font: 600 .95rem "DM Sans", sans-serif;
+            cursor: pointer;
             transition: transform .25s, background .25s;
         }
-        .boton:hover { transform: translateY(-3px); background: var(--azul-oscuro); }
-        .boton-claro { background: white; color: var(--azul-oscuro); }
-        .boton-claro:hover { background: var(--salvia-claro); }
+
+        .boton:hover {
+            transform: translateY(-3px);
+            background: var(--azul-oscuro);
+        }
+
+        .boton-claro {
+            background: white;
+            color: var(--azul-oscuro);
+        }
+
+        .boton-claro:hover {
+            background: var(--salvia-claro);
+        }
 
         /* Portada principal */
         .hero {
-            min-height: 92vh; padding: 0; position: relative;
-            display: grid; place-items: center; text-align: center; color: white; overflow: hidden;
+            min-height: 92vh;
+            padding: 0;
+            position: relative;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
         }
-        .hero video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-        .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(35,55,59,.25), rgba(35,55,59,.78)); }
-        .hero-marco { position: absolute; inset: 26px; border: 1px solid rgba(240,223,189,.5); z-index: 1; pointer-events: none; }
-        .hero-contenido { position: relative; z-index: 1; width: min(90%, 850px); padding: 40px 15px; }
-        .hero h1 { font-size: clamp(3rem, 9vw, 6.6rem); line-height: 1.05; margin: 18px 0; }
-        .hero p { font-size: clamp(1rem, 2.5vw, 1.3rem); max-width: 650px; margin: auto; }
-        .hero-nombre { color: #f0dfbd; font-size: clamp(1.2rem, 3vw, 1.8rem); margin-top: 20px; }
+
+        .hero video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(35, 55, 59, .25), rgba(35, 55, 59, .78));
+        }
+
+        .hero-marco {
+            position: absolute;
+            inset: 26px;
+            border: 1px solid rgba(240, 223, 189, .5);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero-contenido {
+            position: relative;
+            z-index: 1;
+            width: min(90%, 850px);
+            padding: 40px 15px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 9vw, 6.6rem);
+            line-height: 1.05;
+            margin: 18px 0;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .hero-nombre {
+            color: #f0dfbd;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            margin-top: 20px;
+        }
 
         /* Invitación */
-        .presentacion { background: var(--crema); }
+        .presentacion {
+            background: var(--crema);
+        }
+
         .presentacion-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
         }
+
         .presentacion-foto {
-            width: 100%; height: 520px; object-fit: cover; border-radius: 200px 200px 20px 20px;
-            position: relative; z-index: 1; display: block;
-            box-shadow: 0 25px 50px rgba(53,76,81,.2); border: 6px solid white;
+            width: 100%;
+            height: 520px;
+            object-fit: cover;
+            border-radius: 200px 200px 20px 20px;
+            position: relative;
+            z-index: 1;
+            display: block;
+            box-shadow: 0 25px 50px rgba(53, 76, 81, .2);
+            border: 6px solid white;
         }
-        .marco { position: relative; }
+
+        .marco {
+            position: relative;
+        }
+
         .marco::before {
-            content: ""; position: absolute; inset: -16px 16px 16px -16px; z-index: 0;
-            border: 1.5px solid var(--dorado); border-radius: 212px 212px 26px 26px;
+            content: "";
+            position: absolute;
+            inset: -16px 16px 16px -16px;
+            z-index: 0;
+            border: 1.5px solid var(--dorado);
+            border-radius: 212px 212px 26px 26px;
         }
-        .presentacion-texto { text-align: center; padding: 15px; }
-        .presentacion-texto h2 { color: var(--azul-oscuro); font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.2; margin: 14px 0 20px; }
-        .presentacion-texto p { color: #657070; margin: 14px auto; max-width: 500px; }
-        .firma { margin-top: 28px; color: var(--azul); font-family: "Playfair Display", serif; font-size: 1.5rem; }
+
+        .presentacion-texto {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .presentacion-texto h2 {
+            color: var(--azul-oscuro);
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            line-height: 1.2;
+            margin: 14px 0 20px;
+        }
+
+        .presentacion-texto p {
+            color: #657070;
+            margin: 14px auto;
+            max-width: 500px;
+        }
+
+        .firma {
+            margin-top: 28px;
+            color: var(--azul);
+            font-family: "Playfair Display", serif;
+            font-size: 1.5rem;
+        }
 
         /* Fecha, hora y dirección en la invitación */
         .detalles-evento {
-            margin: 30px auto 0; max-width: 460px; padding: 8px 26px;
-            background: white; border-radius: 20px; border: 1px solid #ece6d9;
-            box-shadow: 0 10px 26px rgba(53,76,81,.09);
+            margin: 30px auto 0;
+            max-width: 460px;
+            padding: 8px 26px;
+            background: white;
+            border-radius: 20px;
+            border: 1px solid #ece6d9;
+            box-shadow: 0 10px 26px rgba(53, 76, 81, .09);
         }
-        .detalle { padding: 16px 0; border-bottom: 1px solid #efe9dc; }
-        .detalle:last-child { border-bottom: 0; }
+
+        .detalle {
+            padding: 16px 0;
+            border-bottom: 1px solid #efe9dc;
+        }
+
+        .detalle:last-child {
+            border-bottom: 0;
+        }
+
         .detalle-etiqueta {
-            display: block; color: var(--dorado); text-transform: uppercase;
-            letter-spacing: 3px; font-size: .72rem; font-weight: 700; margin-bottom: 2px;
+            display: block;
+            color: var(--dorado);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: .72rem;
+            font-weight: 700;
+            margin-bottom: 2px;
         }
-        .detalle-valor { display: block; color: var(--azul-oscuro); font-family: "Playfair Display", serif; font-size: 1.2rem; line-height: 1.45; }
+
+        .detalle-valor {
+            display: block;
+            color: var(--azul-oscuro);
+            font-family: "Playfair Display", serif;
+            font-size: 1.2rem;
+            line-height: 1.45;
+        }
 
         /* Significado del nombre */
-        .significado { background: var(--crema); }
+        .significado {
+            background: var(--crema);
+        }
+
         .significado-card {
-            position: relative; max-width: 760px; margin: 0 auto; background: white;
-            border-radius: 26px; padding: clamp(30px, 5vw, 50px) clamp(24px, 4vw, 46px);
-            box-shadow: 0 20px 50px rgba(50,70,60,.12);
+            position: relative;
+            max-width: 760px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 26px;
+            padding: clamp(30px, 5vw, 50px) clamp(24px, 4vw, 46px);
+            box-shadow: 0 20px 50px rgba(50, 70, 60, .12);
         }
+
         .significado-card::before {
-            content: ""; position: absolute; inset: 12px; border-radius: 18px;
-            border: 1.5px dashed rgba(185,154,105,.55); pointer-events: none;
+            content: "";
+            position: absolute;
+            inset: 12px;
+            border-radius: 18px;
+            border: 1.5px dashed rgba(185, 154, 105, .55);
+            pointer-events: none;
         }
-        .significado-def { position: relative; text-align: center; font-size: 1.1rem; color: #566260; }
-        .significado-def strong { color: var(--azul-oscuro); font-family: "Playfair Display", serif; font-weight: 600; }
-        .significado-sub { position: relative; margin: 26px 0 10px; color: var(--azul-oscuro); font-weight: 600; text-align: center; }
-        .significado-lista { position: relative; list-style: none; max-width: 600px; margin: 0 auto; }
+
+        .significado-def {
+            position: relative;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #566260;
+        }
+
+        .significado-def strong {
+            color: var(--azul-oscuro);
+            font-family: "Playfair Display", serif;
+            font-weight: 600;
+        }
+
+        .significado-sub {
+            position: relative;
+            margin: 26px 0 10px;
+            color: var(--azul-oscuro);
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .significado-lista {
+            position: relative;
+            list-style: none;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
         .significado-lista li {
-            position: relative; padding: 12px 0 12px 28px; color: #5e6a68;
+            position: relative;
+            padding: 12px 0 12px 28px;
+            color: #5e6a68;
         }
-        .significado-lista li::before { content: "✦"; position: absolute; left: 2px; top: 12px; color: var(--dorado); }
-        .significado-lista strong { color: var(--azul-oscuro); }
+
+        .significado-lista li::before {
+            content: "✦";
+            position: absolute;
+            left: 2px;
+            top: 12px;
+            color: var(--dorado);
+        }
+
+        .significado-lista strong {
+            color: var(--azul-oscuro);
+        }
 
         /* Botón superior de confirmación */
         .barra-confirmar {
-            position: fixed; top: 14px; left: 0; right: 0; z-index: 90;
-            display: flex; justify-content: center; pointer-events: none;
+            position: fixed;
+            top: 14px;
+            left: 0;
+            right: 0;
+            z-index: 90;
+            display: flex;
+            justify-content: center;
+            pointer-events: none;
         }
+
         .barra-confirmar .boton {
-            pointer-events: auto; padding: 11px 24px; font-size: .9rem;
-            background: var(--dorado); box-shadow: 0 6px 20px rgba(0,0,0,.25);
+            pointer-events: auto;
+            padding: 11px 24px;
+            font-size: .9rem;
+            background: var(--dorado);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, .25);
         }
-        .barra-confirmar .boton:hover { background: #9d8052; }
+
+        .barra-confirmar .boton:hover {
+            background: #9d8052;
+        }
 
         /* Nombre del bebé */
         .nombre-bebe {
             background: radial-gradient(circle at 50% 0%, #f4f7f2 0%, var(--salvia-claro) 70%);
-            text-align: center; position: relative;
+            text-align: center;
+            position: relative;
         }
-        .nombre-bebe h2 { color: var(--azul-oscuro); font-size: clamp(2.6rem, 7vw, 5rem); margin: 10px 0; }
-        .nombre-bebe .subnombre { color: var(--dorado); letter-spacing: 4px; text-transform: uppercase; font-size: .82rem; }
-        .nombre-bebe p { max-width: 650px; margin: 18px auto 0; color: #596663; }
+
+        .nombre-bebe h2 {
+            color: var(--azul-oscuro);
+            font-size: clamp(2.6rem, 7vw, 5rem);
+            margin: 10px 0;
+        }
+
+        .nombre-bebe .subnombre {
+            color: var(--dorado);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-size: .82rem;
+        }
+
+        .nombre-bebe p {
+            max-width: 650px;
+            margin: 18px auto 0;
+            color: #596663;
+        }
 
         /* Fecha y cuenta regresiva */
         .fecha-section {
-            background: radial-gradient(circle at 85% 8%, rgba(255,255,255,.12), transparent 45%), var(--azul);
-            color: white; text-align: center;
+            background: radial-gradient(circle at 85% 8%, rgba(255, 255, 255, .12), transparent 45%), var(--azul);
+            color: white;
+            text-align: center;
         }
-        .fecha-section .titulo { color: white; }
-        .fecha-destacada { font-family: "Playfair Display", serif; font-size: clamp(1.7rem, 4vw, 2.5rem); margin: 15px 0 28px; color: #f0dfbd;
-            display: inline-block; padding: 14px 34px; border-top: 1px solid rgba(240,223,189,.5); border-bottom: 1px solid rgba(240,223,189,.5); }
-        #countdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; max-width: 720px; margin: 30px auto 0; }
+
+        .fecha-section .titulo {
+            color: white;
+        }
+
+        .fecha-destacada {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(1.7rem, 4vw, 2.5rem);
+            margin: 15px 0 28px;
+            color: #f0dfbd;
+            display: inline-block;
+            padding: 14px 34px;
+            border-top: 1px solid rgba(240, 223, 189, .5);
+            border-bottom: 1px solid rgba(240, 223, 189, .5);
+        }
+
+        #countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            max-width: 720px;
+            margin: 30px auto 0;
+        }
+
         .count-box {
-            border: 1px solid rgba(240,223,189,.45); border-radius: 18px; padding: 22px 8px;
-            background: rgba(255,255,255,.09); backdrop-filter: blur(4px);
-            box-shadow: 0 10px 28px rgba(0,0,0,.12);
+            border: 1px solid rgba(240, 223, 189, .45);
+            border-radius: 18px;
+            padding: 22px 8px;
+            background: rgba(255, 255, 255, .09);
+            backdrop-filter: blur(4px);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, .12);
         }
-        .count-number { display: block; font-size: clamp(2rem, 5vw, 3.5rem); color: #f0dfbd; font-weight: 600; }
-        .count-label { font-size: .75rem; letter-spacing: 2px; text-transform: uppercase; }
+
+        .count-number {
+            display: block;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: #f0dfbd;
+            font-weight: 600;
+        }
+
+        .count-label {
+            font-size: .75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
 
         /* Video */
-        .video-section { background: var(--arena); }
-        .video-contenedor { max-width: 850px; margin: 35px auto 0; border-radius: 22px; overflow: hidden; border: 6px solid white; box-shadow: 0 18px 45px rgba(45,60,58,.15); }
-        .gallery-video { display: block; width: 100%; max-height: 620px; background: #222; }
+        .video-section {
+            background: var(--arena);
+        }
+
+        .video-contenedor {
+            max-width: 850px;
+            margin: 35px auto 0;
+            border-radius: 22px;
+            overflow: hidden;
+            border: 6px solid white;
+            box-shadow: 0 18px 45px rgba(45, 60, 58, .15);
+        }
+
+        .gallery-video {
+            display: block;
+            width: 100%;
+            max-height: 620px;
+            background: #222;
+        }
 
         /* Lluvia de sobres */
-        .sobres { background: linear-gradient(180deg, var(--salvia-claro), #f3f6f0); }
-        .sobre-layout { display: grid; grid-template-columns: .9fr 1.1fr; gap: 38px; align-items: center; max-width: 1000px; margin: 40px auto 0; }
+        .sobres {
+            background: linear-gradient(180deg, var(--salvia-claro), #f3f6f0);
+        }
+
+        .sobre-layout {
+            display: grid;
+            grid-template-columns: .9fr 1.1fr;
+            gap: 38px;
+            align-items: center;
+            max-width: 1000px;
+            margin: 40px auto 0;
+        }
+
         .sobre-media {
-            position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 26px;
-            border: 6px solid white; background: #2b3d40; box-shadow: 0 20px 50px rgba(50,70,60,.18);
+            position: relative;
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+            border-radius: 26px;
+            border: 6px solid white;
+            background: #2b3d40;
+            box-shadow: 0 20px 50px rgba(50, 70, 60, .18);
         }
-        .sobre-media img, .sobre-media video { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+        .sobre-media img,
+        .sobre-media video {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .sobre-card {
-            position: relative; text-align: center; background: white; border-radius: 26px;
+            position: relative;
+            text-align: center;
+            background: white;
+            border-radius: 26px;
             padding: clamp(34px, 5vw, 54px) clamp(24px, 4vw, 44px);
-            box-shadow: 0 20px 50px rgba(50,70,60,.12);
+            box-shadow: 0 20px 50px rgba(50, 70, 60, .12);
         }
+
         .sobre-card::before {
-            content: ""; position: absolute; inset: 12px; border-radius: 18px;
-            border: 1.5px dashed rgba(185,154,105,.55); pointer-events: none;
+            content: "";
+            position: absolute;
+            inset: 12px;
+            border-radius: 18px;
+            border: 1.5px dashed rgba(185, 154, 105, .55);
+            pointer-events: none;
         }
+
         .sobre-icono {
-            width: 68px; height: 68px; margin: 0 auto 18px; border-radius: 50%;
-            display: grid; place-items: center; background: var(--dorado);
-            box-shadow: 0 10px 24px rgba(185,154,105,.4);
+            width: 68px;
+            height: 68px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: var(--dorado);
+            box-shadow: 0 10px 24px rgba(185, 154, 105, .4);
         }
-        .sobre-icono svg { width: 32px; height: 32px; }
-        .sobre-card h3 { color: var(--azul-oscuro); font-size: clamp(1.7rem, 3.4vw, 2.3rem); line-height: 1.25; margin: 8px 0 14px; }
-        .sobre-card p { color: #65706d; margin: 0 auto 26px; }
+
+        .sobre-icono svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .sobre-card h3 {
+            color: var(--azul-oscuro);
+            font-size: clamp(1.7rem, 3.4vw, 2.3rem);
+            line-height: 1.25;
+            margin: 8px 0 14px;
+        }
+
+        .sobre-card p {
+            color: #65706d;
+            margin: 0 auto 26px;
+        }
+
         .sobre-nota {
-            display: inline-block; padding: 11px 24px; border-radius: 40px;
-            background: var(--salvia-claro); color: var(--azul-oscuro); font-weight: 600; font-size: .92rem;
+            display: inline-block;
+            padding: 11px 24px;
+            border-radius: 40px;
+            background: var(--salvia-claro);
+            color: var(--azul-oscuro);
+            font-weight: 600;
+            font-size: .92rem;
         }
 
         /* Lugar */
-        .ubicacion { text-align: center; }
-        .direccion { margin: 22px auto; line-height: 1.9; }
+        .ubicacion {
+            text-align: center;
+        }
+
+        .direccion {
+            margin: 22px auto;
+            line-height: 1.9;
+        }
+
         .mapa {
-            width: 100%; max-width: 900px; height: 360px; border: 6px solid white; border-radius: 22px;
-            margin: 20px auto 25px; display: block; box-shadow: 0 18px 42px rgba(53,76,81,.16);
+            width: 100%;
+            max-width: 900px;
+            height: 360px;
+            border: 6px solid white;
+            border-radius: 22px;
+            margin: 20px auto 25px;
+            display: block;
+            box-shadow: 0 18px 42px rgba(53, 76, 81, .16);
         }
 
         /* Confirmación */
         .confirmacion {
             background: linear-gradient(135deg, var(--azul-oscuro), var(--azul));
-            color: white; text-align: center;
+            color: white;
+            text-align: center;
         }
-        .confirmacion .titulo { color: white; }
-        .confirmacion p { max-width: 650px; margin: 18px auto 28px; }
-        .fecha-limite { color: #f0dfbd; font-weight: 700; }
 
-        footer { padding: 45px 20px; text-align: center; background: #293d41; color: white; border-top: 3px solid var(--dorado); }
-        footer .firma-final { font-family: "Playfair Display", serif; font-size: 1.8rem; color: #f0dfbd; margin-bottom: 8px; }
+        .confirmacion .titulo {
+            color: white;
+        }
+
+        .confirmacion p {
+            max-width: 650px;
+            margin: 18px auto 28px;
+        }
+
+        .fecha-limite {
+            color: #f0dfbd;
+            font-weight: 700;
+        }
+
+        footer {
+            padding: 45px 20px;
+            text-align: center;
+            background: #293d41;
+            color: white;
+            border-top: 3px solid var(--dorado);
+        }
+
+        footer .firma-final {
+            font-family: "Playfair Display", serif;
+            font-size: 1.8rem;
+            color: #f0dfbd;
+            margin-bottom: 8px;
+        }
+
         #btnMusica {
-            position: fixed; right: 18px; bottom: 18px; z-index: 100;
-            width: 50px; height: 50px; border: 0; border-radius: 50%;
-            background: var(--dorado); color: white; font-size: 1.2rem; cursor: pointer;
-            box-shadow: 0 5px 18px rgba(0,0,0,.2);
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            z-index: 100;
+            width: 50px;
+            height: 50px;
+            border: 0;
+            border-radius: 50%;
+            background: var(--dorado);
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, .2);
         }
 
         @media (max-width: 760px) {
-            section { padding: 65px 18px; }
-            .presentacion-grid, .sobre-layout { grid-template-columns: 1fr; gap: 28px; }
-            .marco { max-width: 400px; margin: 0 auto; width: 100%; }
-            .presentacion-foto { height: 370px; }
-            .sobre-media { max-width: 420px; width: 100%; margin: 0 auto; }
-            #countdown { grid-template-columns: repeat(2, 1fr); }
-            .mapa { height: 290px; }
+            section {
+                padding: 65px 18px;
+            }
+
+            .presentacion-grid,
+            .sobre-layout {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+
+            .marco {
+                max-width: 400px;
+                margin: 0 auto;
+                width: 100%;
+            }
+
+            .presentacion-foto {
+                height: 370px;
+            }
+
+            .sobre-media {
+                max-width: 420px;
+                width: 100%;
+                margin: 0 auto;
+            }
+
+            #countdown {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .mapa {
+                height: 290px;
+            }
         }
     </style>
 </head>
@@ -270,7 +757,7 @@
 <body>
     <div id="pantallaInicio">
         <video id="videoInicio" autoplay muted loop playsinline preload="auto">
-            <source src="Flor.mp4" type="video/mp4">
+            <source src="./assets/Flor.mp4" type="video/mp4">
         </video>
         <div class="velo"></div>
         <div class="inicio-contenido">
@@ -282,30 +769,35 @@
     </div>
 
     <div class="barra-confirmar">
-        <a class="boton" href="https://wa.me/573214829028?text=%F0%9F%91%8B%F0%9F%8F%BB%20Hola%20Viviana%20y%20Carlos.%20Confirmo%20mi%20asistencia%20al%20Baby%20Shower%20de%20Ethan.%20%C2%A1Gracias%20por%20la%20invitaci%C3%B3n%21%20%F0%9F%8D%BC%F0%9F%91%B6%F0%9F%8F%BB" target="_blank" rel="noopener noreferrer">Confirmar asistencia</a>
+        <a class="boton"
+            href="https://wa.me/573214829028?text=%F0%9F%91%8B%F0%9F%8F%BB%20Hola%20Viviana%20y%20Carlos.%20Confirmo%20mi%20asistencia%20al%20Baby%20Shower%20de%20Ethan.%20%C2%A1Gracias%20por%20la%20invitaci%C3%B3n%21%20%F0%9F%8D%BC%F0%9F%91%B6%F0%9F%8F%BB"
+            target="_blank" rel="noopener noreferrer">Confirmar asistencia</a>
     </div>
 
     <main>
         <section class="hero">
             <video id="videoPortada" autoplay muted loop playsinline preload="auto">
-                <source src="Fuego1.mp4" type="video/mp4">
+                <source src="./assets/Fuego1.mp4" type="video/mp4">
             </video>
             <div class="hero-marco"></div>
             <div class="hero-contenido">
                 <div class="etiqueta" style="color:#f0dfbd">Baby Shower</div>
                 <h1>¡Celebremos<br>la llegada de Ethan!</h1>
-                <p>Hay noticias que llenan el corazón de felicidad. Queremos compartir contigo una de las más bonitas de nuestra vida.</p>
+                <p>Hay noticias que llenan el corazón de felicidad. Queremos compartir contigo una de las más bonitas de
+                    nuestra vida.</p>
                 <div class="hero-nombre">Viviana &amp; Carlos</div>
             </div>
         </section>
 
         <section class="presentacion">
             <div class="contenedor presentacion-grid">
-                <div class="marco"><img class="presentacion-foto" src="Rey.jpg" alt="Retrato destacado de la invitación" loading="lazy"></div>
+                <div class="marco"><img class="presentacion-foto" src="./assets/Rey.jpg"
+                        alt="Retrato destacado de la invitación" loading="lazy"></div>
                 <div class="presentacion-texto">
                     <div class="etiqueta">Con mucha alegría</div>
                     <h2>Queremos invitarte a compartir este día</h2>
-                    <p>La familia crece y nuestros corazones también. Antes de tener a Ethan en brazos, queremos reunir a quienes queremos para celebrar su próxima llegada.</p>
+                    <p>La familia crece y nuestros corazones también. Antes de tener a Ethan en brazos, queremos reunir
+                        a quienes queremos para celebrar su próxima llegada.</p>
                     <p>Será una tarde para conversar, reír, jugar y crear recuerdos que guardaremos siempre.</p>
                     <div class="firma">Viviana &amp; Carlos</div>
                     <div class="detalles-evento">
@@ -331,7 +823,8 @@
                 <div class="subnombre">El protagonista de esta historia</div>
                 <h2>Ethan Herrera Corredor</h2>
                 <div class="ornamento">✦ ❧ ✦</div>
-                <p>Pequeño Ethan, todavía no llegas y ya eres parte de tantos sueños. Esta celebración es para ti y para todo el amor que te espera.</p>
+                <p>Pequeño Ethan, todavía no llegas y ya eres parte de tantos sueños. Esta celebración es para ti y para
+                    todo el amor que te espera.</p>
             </div>
         </section>
 
@@ -341,11 +834,15 @@
                 <h2 class="titulo">El significado de Ethan</h2>
                 <div class="ornamento">✦ ❧ ✦</div>
                 <div class="significado-card">
-                    <p class="significado-def">Nombre de origen hebreo que significa <strong>«fuerte, firme y duradero»</strong>. Representa la fortaleza, la sabiduría, la perseverancia y la fidelidad. En la Biblia se asocia con la sabiduría y la fidelidad eterna de Dios.</p>
+                    <p class="significado-def">Nombre de origen hebreo que significa <strong>«fuerte, firme y
+                            duradero»</strong>. Representa la fortaleza, la sabiduría, la perseverancia y la fidelidad.
+                        En la Biblia se asocia con la sabiduría y la fidelidad eterna de Dios.</p>
                     <p class="significado-sub">El nombre aparece en diferentes pasajes bíblicos:</p>
                     <ul class="significado-lista">
-                        <li><strong>1 Reyes 4:31:</strong> se menciona a Etán el ezraíta, reconocido por su sabiduría.</li>
-                        <li><strong>Salmo 89:</strong> tradicionalmente atribuido a Etán el ezraíta. Es un salmo que habla de la fidelidad, la misericordia y las promesas de Dios.</li>
+                        <li><strong>1 Reyes 4:31:</strong> se menciona a Etán el ezraíta, reconocido por su sabiduría.
+                        </li>
+                        <li><strong>Salmo 89:</strong> tradicionalmente atribuido a Etán el ezraíta. Es un salmo que
+                            habla de la fidelidad, la misericordia y las promesas de Dios.</li>
                     </ul>
                 </div>
             </div>
@@ -358,10 +855,14 @@
                 <div class="fecha-destacada">13 de diciembre de 2026 · 1:30 p. m.</div>
                 <p>¡Nos hace mucha ilusión contar con tu compañía!</p>
                 <div id="countdown">
-                    <div class="count-box"><span class="count-number" id="dias">00</span><span class="count-label">Días</span></div>
-                    <div class="count-box"><span class="count-number" id="horas">00</span><span class="count-label">Horas</span></div>
-                    <div class="count-box"><span class="count-number" id="minutos">00</span><span class="count-label">Minutos</span></div>
-                    <div class="count-box"><span class="count-number" id="segundos">00</span><span class="count-label">Segundos</span></div>
+                    <div class="count-box"><span class="count-number" id="dias">00</span><span
+                            class="count-label">Días</span></div>
+                    <div class="count-box"><span class="count-number" id="horas">00</span><span
+                            class="count-label">Horas</span></div>
+                    <div class="count-box"><span class="count-number" id="minutos">00</span><span
+                            class="count-label">Minutos</span></div>
+                    <div class="count-box"><span class="count-number" id="segundos">00</span><span
+                            class="count-label">Segundos</span></div>
                 </div>
             </div>
         </section>
@@ -372,8 +873,9 @@
                 <h2 class="titulo">Nuestra dulce espera</h2>
                 <p class="bajada">Un pequeño vistazo a esta etapa que nos llena de ilusión.</p>
                 <div class="video-contenedor">
-                    <video id="babyVideo" class="gallery-video" autoplay muted loop playsinline controls preload="metadata">
-                        <source src="Baby.mp4" type="video/mp4">
+                    <video id="babyVideo" class="gallery-video" autoplay muted loop playsinline controls
+                        preload="metadata">
+                        <source src="./assets/Baby.mp4" type="video/mp4">
                         Tu navegador no soporta video HTML5.
                     </video>
                 </div>
@@ -386,17 +888,22 @@
                 <h2 class="titulo">Lluvia de sobres</h2>
                 <div class="ornamento">✦ ❧ ✦</div>
                 <div class="sobre-layout">
-                    <div class="sobre-media"><video autoplay muted loop playsinline preload="metadata" aria-label="Lluvia de sobres para Ethan"><source src="Sobre.mp4"></video></div>
+                    <div class="sobre-media"><video autoplay muted loop playsinline preload="metadata"
+                            aria-label="Lluvia de sobres para Ethan">
+                            <source src="./assets/Sobre.mp4" type="video/mp4">
+                        </video></div>
                     <div class="sobre-card">
                         <div class="sobre-icono">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
+                                stroke-linejoin="round" aria-hidden="true">
                                 <rect x="2.5" y="5" width="19" height="14" rx="2.5"></rect>
                                 <path d="M3 7l9 6.5L21 7"></path>
                             </svg>
                         </div>
                         <div class="etiqueta">Nuestro detalle</div>
                         <h3>Una lluvia de sobres para Ethan</h3>
-                        <p>Tu compañía es el mejor regalo. Si deseas tener un detalle con Ethan, nos hará muy felices recibirlo en un sobre durante la celebración.</p>
+                        <p>Tu compañía es el mejor regalo. Si deseas tener un detalle con Ethan, nos hará muy felices
+                            recibirlo en un sobre durante la celebración.</p>
                         <div class="sobre-nota">💌 Gracias de corazón por acompañarnos</div>
                     </div>
                 </div>
@@ -408,9 +915,13 @@
                 <div class="etiqueta">Cómo llegar</div>
                 <h2 class="titulo">Nos encontramos aquí</h2>
                 <div class="ornamento">✦ ❧ ✦</div>
-                <p class="direccion"><strong>Salón de eventos, Conjunto La Flora</strong><br>Cra. 69 Nro. 12-70<br><strong>13 de diciembre de 2026 · 1:30 p. m.</strong></p>
-                <iframe class="mapa" src="https://www.google.com/maps?q=Sal%C3%B3n%20de%20eventos%2C%20Conjunto%20La%20Flora%2C%20Cra.%2069%20Nro.%2012-70&output=embed" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
-                <a class="boton" href="https://maps.app.goo.gl/od3rNY7aZPDHXEUT6" target="_blank" rel="noopener noreferrer">Ver indicaciones en Google Maps ↗</a>
+                <p class="direccion"><strong>Salón de eventos, Conjunto La Flora</strong><br>Cra. 69 Nro.
+                    12-70<br><strong>13 de diciembre de 2026 · 1:30 p. m.</strong></p>
+                <iframe class="mapa"
+                    src="https://www.google.com/maps?q=Sal%C3%B3n%20de%20eventos%2C%20Conjunto%20La%20Flora%2C%20Cra.%2069%20Nro.%2012-70&output=embed"
+                    loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <a class="boton" href="https://maps.app.goo.gl/od3rNY7aZPDHXEUT6" target="_blank"
+                    rel="noopener noreferrer">Ver indicaciones en Google Maps ↗</a>
             </div>
         </section>
 
@@ -418,8 +929,11 @@
             <div class="contenedor">
                 <div class="etiqueta" style="color:#f0dfbd">Tu compañía es importante</div>
                 <h2 class="titulo">¿Contamos contigo?</h2>
-                <p>Ayúdanos a preparar todo para recibirte confirmando tu asistencia antes del <span class="fecha-limite">05 de diciembre de 2026</span>.</p>
-                <a class="boton boton-claro" href="https://wa.me/573214829028?text=%F0%9F%91%8B%F0%9F%8F%BB%20Hola%20Viviana%20y%20Carlos.%20Confirmo%20mi%20asistencia%20al%20Baby%20Shower%20de%20Ethan.%20%C2%A1Gracias%20por%20la%20invitaci%C3%B3n%21%20%F0%9F%8D%BC%F0%9F%91%B6%F0%9F%8F%BB" target="_blank" rel="noopener noreferrer">Confirmar por WhatsApp</a>
+                <p>Ayúdanos a preparar todo para recibirte confirmando tu asistencia antes del <span
+                        class="fecha-limite">05 de diciembre de 2026</span>.</p>
+                <a class="boton boton-claro"
+                    href="https://wa.me/573214829028?text=%F0%9F%91%8B%F0%9F%8F%BB%20Hola%20Viviana%20y%20Carlos.%20Confirmo%20mi%20asistencia%20al%20Baby%20Shower%20de%20Ethan.%20%C2%A1Gracias%20por%20la%20invitaci%C3%B3n%21%20%F0%9F%8D%BC%F0%9F%91%B6%F0%9F%8F%BB"
+                    target="_blank" rel="noopener noreferrer">Confirmar por WhatsApp</a>
             </div>
         </section>
     </main>
@@ -431,7 +945,7 @@
     </footer>
 
     <audio id="musica" loop preload="auto">
-        <source src="Sound.mp3" type="audio/mpeg">
+        <source src="./assets/Sound.mp3" type="audio/mpeg">
     </audio>
     <button id="btnMusica" onclick="toggleMusica()" aria-label="Activar o pausar música">🔇</button>
 
@@ -445,7 +959,7 @@
             document.querySelectorAll("video").forEach(video => {
                 video.muted = true;
                 video.playsInline = true;
-                video.play().catch(() => {});
+                video.play().catch(() => { });
             });
         }
 
@@ -464,7 +978,7 @@
         function toggleMusica() {
             if (musica.paused) {
                 musica.volume = 0.3;
-                musica.play().then(() => btnMusica.textContent = "🔊").catch(() => {});
+                musica.play().then(() => btnMusica.textContent = "🔊").catch(() => { });
             } else {
                 musica.pause();
                 btnMusica.textContent = "🔇";
@@ -513,4 +1027,5 @@
         setInterval(actualizarCountdown, 1000);
     </script>
 </body>
+
 </html>
